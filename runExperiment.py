@@ -74,7 +74,7 @@ instrText = visual.TextStim(win=win, name='instrText',
 targetimg1 = visual.ImageStim(
     win=win, image= script_path + '\\T1.jpg',
     name = 'target1', mask=None,
-    pos=(0,300), size=[350,300],
+    pos=(0,300), size=[350,250],
     colorSpace='rgb', opacity=1
 )
 targetimg2 = visual.ImageStim(
@@ -102,19 +102,19 @@ cross = visual.GratingStim(
 
 ## response screen ##
 present_button = visual.Rect(win=win, name='present',
-    pos=(0, 150),width = 300, height = 150,opacity = .8,
+    pos=(0, 50),width = 300, height = 150,opacity = .8,
     lineColor=(0, 142/255.0, 18/255.0), lineColorSpace='rgb',
     fillColor=(0, 142/255.0, 18/255.0), fillColorSpace='rgb')
 present_text = visual.TextStim(win=win, name='presentTxt',
     text='Present',
     font='Arial',
-    units='pix', pos=[0, 150], height=30, wrapWidth=800, ori=0,
+    units='pix', pos=[0, 50], height=30, wrapWidth=800, ori=0,
     color=[1,1,1], colorSpace='rgb', opacity=1,
     depth=0.0)
 present_text2 = visual.TextStim(win=win, name='presentTxt2',
     text='Please click where the target was',
     font='Arial',
-    units='pix', pos=[0, 150], height=30, wrapWidth=800, ori=0,
+    units='pix', pos=[0, 0], height=30, wrapWidth=800, ori=0,
     color=[1,1,1], colorSpace='rgb', opacity=1,
     depth=0.0)
 
@@ -314,6 +314,7 @@ for thisTrial in trials:
         ContinueThisRoutine = True
         click_pos = None
         while ContinueThisRoutine == True:
+            targetimg1.setAutoDraw(True)
             present_button.setAutoDraw(True)
             present_text.setAutoDraw(True)
             absent_button.setAutoDraw(True)
@@ -328,6 +329,7 @@ for thisTrial in trials:
                 ContinueExtraRoutine = True
                 while ContinueExtraRoutine:
                     mouse = event.Mouse()
+                    targetimg1.setAutoDraw(False)
                     present_button.setAutoDraw(False)
                     present_text.setAutoDraw(False)
                     absent_button.setAutoDraw(False)
@@ -343,6 +345,7 @@ for thisTrial in trials:
                 dataFile = dataFile.append(newrow, ignore_index=True)
                 
             if mouse.isPressedIn(absent_button):
+                targetimg1.setAutoDraw(False)
                 present_button.setAutoDraw(False)
                 present_text.setAutoDraw(False)
                 absent_button.setAutoDraw(False)
